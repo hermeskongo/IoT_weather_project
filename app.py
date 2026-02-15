@@ -1,5 +1,6 @@
 import serial
 import time
+import json
 import threading
 
 from flask_socketio import SocketIO
@@ -42,19 +43,20 @@ def read_arduino():
     while True:
         if ser.in_waiting > 0:
             line = ser.readline().decode('utf-8', errors='ignore').strip()
-            
-            for part in line.split(' '):
-                if(part.startswith('T')):
-                    data['temperature'] = float(part.split(':')[1].strip())
+            if line.startswith("{") and line.endswith("}"):
+                try :
+                    values = json.loads(line)
                     
-                elif(part.startswith('H')):
-                    data['humidity'] = float(part.split(':')[1].strip())
-                    
-                elif(part.startswith('P')):
-                    data['pressure'] = float(part.split(':')[1].strip())
+                    data['humidity'] = values.get('humidity')
+                    data['temperature'] = values.get('temperature')
+                    data['pressure'] = values.get('pressure')
+                except json.JSONDecodeError as e:
+                    print(e)
+            else:
+                print(f"Ignored invalid line: {line}")
             
             socketio.emit('sensor_update', data)
-        time.sleep(3)
+        time.sleep(0.05)
    
 
 def send_command(command):
