@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Météo dashboard</title>
+    <script src="script.js" type="module"></script>
+</head>
+
+<body>
+    <div class="app">
+        <!-- HEADER -->
+        <div id="toast-container"></div>
+        <div class="header">
+            <div class="header-left">
+                <h1>🌡 Weather Station</h1>
+                <p>Surveillance en temps réel · Casablanca</p>
+            </div>
+            <div class="header-right">
+                <div class="status-dot"></div>
+                <span>Connecté · COM2</span>
+            </div>
+        </div>
+        <!-- HERO TEMPERATURE -->
+        <div class="hero-card">
+            <div class="hero-left">
+                <div class="hero-label">Température actuelle</div>
+                <div class="hero-value" id="heroTemp">--<sup>°C</sup></div>
+            </div>
+            <div class="hero-icon">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sun rays -->
+                    <g opacity="0.6">
+                        <line x1="50" y1="8" x2="50" y2="18" stroke="#fb923c" stroke-width="3" stroke-linecap="round" />
+                        <line x1="50" y1="82" x2="50" y2="92" stroke="#fb923c" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line x1="8" y1="50" x2="18" y2="50" stroke="#fb923c" stroke-width="3" stroke-linecap="round" />
+                        <line x1="82" y1="50" x2="92" y2="50" stroke="#fb923c" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line x1="19" y1="19" x2="26" y2="26" stroke="#fb923c" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line x1="74" y1="74" x2="81" y2="81" stroke="#fb923c" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line x1="81" y1="19" x2="74" y2="26" stroke="#fb923c" stroke-width="3"
+                            stroke-linecap="round" />
+                        <line x1="26" y1="74" x2="19" y2="81" stroke="#fb923c" stroke-width="3"
+                            stroke-linecap="round" />
+                    </g>
+                    <!-- Sun circle -->
+                    <circle cx="50" cy="50" r="22" fill="#fb923c" opacity="0.15" />
+                    <circle cx="50" cy="50" r="16" fill="#fb923c" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- STAT CARDS GRID -->
+        <div class="grid">
+
+            <!-- Humidity -->
+            <div class="card">
+                <div class="card-icon icon-blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#5b8fff" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                    </svg>
+                </div>
+                <div class="card-label">Humidité</div>
+                <div class="card-value" id="cardHumidity">--<span class="unit">%</span></div>
+            </div>
+
+            <!-- Pressure -->
+            <div class="card">
+                <div class="card-icon icon-purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+                <div class="card-label">Pression atm.</div>
+                <div class="card-value" id="cardPressure">--<span class="unit">hPa</span></div>
+            </div>
+
+            <!-- Light / LDR -->
+            <div class="card">
+                <div class="card-icon icon-green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                </div>
+                <div class="card-label">Lumière (LDR)</div>
+                <div class="card-value" id="cardLDR">--<span class="unit">lux</span></div>
+            </div>
+        </div>
+
+        <!-- FAN CONTROL -->
+        <div class="fan-card">
+            <div class="fan-left">
+                <div class="fan-icon-wrap">
+                    <svg class="fan-spinner off" id="fanSpinner" viewBox="0 0 24 24" fill="none" stroke="#5b8fff"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2c0 3-2 5-5 6 1 3 4 4 5 4s4-1 5-4c-3-1-5-3-5-6z" />
+                        <path d="M12 22c0-3 2-5 5-6-1-3-4-4-5-4s-4 1-5 4c3 1 5 3 5 6z" />
+                        <path d="M2 12c3 0 5 2 6 5 3-1 4-4 4-5s-1-4-4-5c-1 3-3 5-6 5z" />
+                        <path d="M22 12c-3 0-5 2-6 5-3-1-4-4-4-5s1-4 4-5c1 3 3 5 6 5z" />
+                        <circle cx="12" cy="12" r="2" fill="#5b8fff" />
+                    </svg>
+                </div>
+                <div class="fan-info">
+                    <h3>Ventilateur</h3>
+                    <p>Mode : <span class="mode-auto" id="modeLabel">Automatique</span> · Seuil : 25°C</p>
+                </div>
+            </div>
+            <div class="toggle-wrap">
+                <span class="toggle-label" id="toggleLabel">OFF</span>
+                <label class="toggle">
+                    <input type="checkbox" id="fanToggle" />
+                    <div class="toggle-track"></div>
+                </label>
+            </div>
+        </div>
+
+        <!-- TIME -->
+        <div class="time-row">
+            <div class="time-badge">Dernière mise à jour : <span id="lastUpdate">--:--:--</span></div>
+        </div>
+    </div>
+
+    <footer style="
+        margin-top: 48px;
+        padding: 24px;
+        text-align: center;
+        border-top: 1px solid rgba(100,140,255,0.08);
+    ">
+        <p style="
+            font-size: 1.15rem;
+            color: #64748b;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.3px;
+        ">
+            Fait avec ❤️ par
+            <a href="https://portfolio.com" target="_blank" style="
+                color: #5b8fff;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s;
+                cursor: pointer;
+                " onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#5b8fff'">
+                Hermès KONGO
+            </a>
+        </p>
+    </footer>
+</body>
+
+</html>
