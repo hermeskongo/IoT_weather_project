@@ -185,10 +185,11 @@ body::before {
     z-index: 1;
 }
 
-.hero-icon svg {
-    width: 100px;
-    height: 100px;
-    filter: drop-shadow(0 0 18px rgba(251, 146, 60, 0.3));
+.bi-sun {
+    display: inline-block;
+    font-size: 6rem;
+    color: orange;
+    filter: drop-shadow(0 0 28px rgba(255, 207, 119, 0.5));
     animation: float 4s ease-in-out infinite;
 }
 
@@ -196,11 +197,11 @@ body::before {
 
     0%,
     100% {
-        transform: translateY(0);
+        transform: translateY(5px);
     }
 
     50% {
-        transform: translateY(-8px);
+        transform: translateY(-15px);
     }
 }
 
@@ -237,23 +238,26 @@ body::before {
     align-items: center;
     justify-content: center;
     margin-bottom: 18px;
+    background-color: #2a3050;
 }
 
-.card-icon svg {
-    width: 22px;
-    height: 22px;
+.bi-droplet {
+    font-size: 1.5rem;
+    color: rgb(51, 177, 255);
 }
 
-.icon-blue {
-    background: rgba(91, 143, 255, 0.12);
+.bi-speedometer {
+    font-size: 1.5rem;
+    color: #a78bfa;
 }
 
-.icon-purple {
-    background: rgba(167, 139, 250, 0.12);
+.bi-lightbulb-fill {
+    font-size: 1.5rem;
+    color: #fb923c;
 }
-
-.icon-green {
-    background: rgba(52, 211, 153, 0.12);
+.bi-fan {
+    font-size: 2.5rem;
+    color: gray;
 }
 
 .card-label {
@@ -320,20 +324,6 @@ body::before {
     gap: 18px;
 }
 
-.fan-icon-wrap {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    background: rgba(91, 143, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.fan-icon-wrap svg {
-    width: 28px;
-    height: 28px;
-}
 
 .fan-info h3 {
     font-size: 1rem;
@@ -414,19 +404,26 @@ body::before {
 }
 
 /* ─── FAN SPINNER (when ON) ─── */
-.fan-spinner {
-    animation: spin 1s linear infinite;
+.bi-fan {
+    display: inline-block;
+    animation: spin 2s linear infinite;
     transition: animation 0.3s;
 }
-
-.fan-spinner.off {
-    animation: none;
+.bi-fan.second-speed {
+    animation: spin 1s linear infinite;
+}
+.bi-fan.third-speed {
+    animation: spin .5s linear infinite;
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+.bi-fan.off {
+    animation-play-state: paused; 
+    color: #6c757d;
+}
+
+@keyframes spin { 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); } 
 }
 
 /* ─── TIME BADGE ─── */

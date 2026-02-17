@@ -9,8 +9,8 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+# Établissement de la communication entre mon server backend et arduino
 try:
-    # Ouvrez d'abord sans spécifier le baudrate
     ser = serial.Serial()
     ser.port = 'COM1'
     ser.baudrate = 9600
@@ -19,7 +19,6 @@ try:
     ser.stopbits = serial.STOPBITS_ONE
     ser.timeout = 1
 
-    # Fermez si déjà ouvert, puis réouvrez
     if ser.is_open:
         ser.close()
     time.sleep(0.5)
@@ -35,21 +34,31 @@ except Exception as e:
 data = {
     'temperature': None,
     'humidity': None,
-    'pressure': None
+    'pressure': None,
+    'fan_state': None,
+    'remote': None
 }
 
-# T:22.00 H:47.00 P:1080.00
+
 def read_arduino():
+    """
+    Lit les données provenant de l'Arduino en continu via le port série, 
+    met à jour le dictionnaire `data` et émet les valeurs aux clients connectés via SocketIO.
+
+    Exceptions :
+        - json.JSONDecodeError : si la ligne n'est pas un JSON valide.
+    """
     while True:
         if ser.in_waiting > 0:
             line = ser.readline().decode('utf-8', errors='ignore').strip()
             if line.startswith("{") and line.endswith("}"):
                 try :
                     values = json.loads(line)
-                    
                     data['humidity'] = values.get('humidity')
                     data['temperature'] = values.get('temperature')
                     data['pressure'] = values.get('pressure')
+                    data['fan_state'] = values.get('fanState')
+                    data['remote'] = values.get('remote')
                 except json.JSONDecodeError as e:
                     print(e)
             else:
