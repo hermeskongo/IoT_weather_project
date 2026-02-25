@@ -426,27 +426,6 @@ body::before {
     to { transform: rotate(360deg); } 
 }
 
-/* ─── TIME BADGE ─── */
-.time-row {
-    display: flex;
-    justify-content: center;
-    margin-top: 28px;
-}
-
-.time-badge {
-    background: var(--clr-surface);
-    border: 1px solid var(--clr-border);
-    border-radius: 40px;
-    padding: 8px 20px;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--clr-text-dim);
-    letter-spacing: 0.5px;
-}
-
-.time-badge span {
-    color: var(--clr-accent);
-}
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 680px) {

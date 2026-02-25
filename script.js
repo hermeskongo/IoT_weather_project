@@ -12,7 +12,7 @@ socket.on('sensor_update', (data) => {
     document.getElementById('heroTemp').innerHTML = data.temperature + '<sup>°C</sup>';
     document.getElementById('cardHumidity').innerHTML = data.humidity + '<span class="unit">%</span>';
     document.getElementById('cardPressure').innerHTML = data.pressure + '<span class="unit">hPa</span>';
-    document.getElementById('cardLDR').innerHTML = data.ldr + '<span class="unit">lux</span>';
+    document.getElementById('cardLDR').innerHTML = data.luminosity + '<span class="unit">lux</span>';
 
     let isOn = data.fan_state == 1 ? true : false
 
@@ -86,16 +86,6 @@ function fanGestion(fanStatus, mode = "remote", isOn) {
 fanToogle.addEventListener('change', (e) => {
     toggleFan(fanToogle)
 })
-
-// ─── MISE À JOUR DE L'HEURE ───
-function updateTime() {
-    const now = new Date();
-    document.getElementById('lastUpdate').textContent =
-        now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-}
-setInterval(updateTime, 1000);
-updateTime();
-
 
 // ─── TOAST NOTIFICATION ───
 

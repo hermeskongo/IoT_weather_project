@@ -36,7 +36,8 @@ data = {
     'humidity': None,
     'pressure': None,
     'fan_state': None,
-    'remote': None
+    'remote': None,
+    'luminosity': None,
 }
 
 
@@ -59,6 +60,7 @@ def read_arduino():
                     data['pressure'] = values.get('pressure')
                     data['fan_state'] = values.get('fanState')
                     data['remote'] = values.get('remote')
+                    data['luminosity'] = values.get('luminosite')
                 except json.JSONDecodeError as e:
                     print(e)
             else:
