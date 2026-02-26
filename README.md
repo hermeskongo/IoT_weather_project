@@ -129,7 +129,7 @@ Le projet est composé de trois parties principales :
 │
 ├─ app.py        # Backend Flask + Socket.IO
 ├─ package.json  # Frontend Node/Vite
-└─ README.txt
+└─ README.md
 ```
 
 ---
