@@ -31,7 +31,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ─── AMBIENT BACKGROUND ─── */
+
 body::before {
     content: '';
     position: fixed;
@@ -44,7 +44,7 @@ body::before {
     pointer-events: none;
 }
 
-/* ─── LAYOUT ─── */
+
 .app {
     position: relative;
     z-index: 1;
@@ -53,7 +53,7 @@ body::before {
     padding: 40px 24px 60px;
 }
 
-/* ─── HEADER ─── */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -112,15 +112,15 @@ body::before {
     font-family: var(--font-mono);
 }
 
-/* ─── MAIN CARD (Temperature Hero) ─── */
+
 .hero-card {
     background: linear-gradient(135deg, rgba(30, 40, 80, 0.7) 0%, rgba(18, 24, 46, 0.85) 100%);
     border: 1px solid var(--clr-border);
     border-radius: var(--radius);
     padding: 38px 36px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 18px;
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(12px);
@@ -205,7 +205,6 @@ body::before {
     }
 }
 
-/* ─── GRID ─── */
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -213,8 +212,11 @@ body::before {
     margin-bottom: 24px;
 }
 
-/* ─── STAT CARD ─── */
 .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: var(--clr-surface);
     border: 1px solid var(--clr-border);
     border-radius: var(--radius);
@@ -301,7 +303,7 @@ body::before {
     margin-right: 3px;
 }
 
-/* ─── FAN CONTROL CARD ─── */
+
 .fan-card {
     background: var(--clr-surface);
     border: 1px solid var(--clr-border);
@@ -347,7 +349,7 @@ body::before {
     font-weight: 500;
 }
 
-/* ─── TOGGLE ─── */
+
 .toggle-wrap {
     display: flex;
     align-items: center;
@@ -403,7 +405,7 @@ body::before {
     box-shadow: 0 0 12px rgba(91, 143, 255, 0.5);
 }
 
-/* ─── FAN SPINNER (when ON) ─── */
+
 .bi-fan {
     display: inline-block;
     animation: spin 2s linear infinite;
@@ -427,7 +429,7 @@ body::before {
 }
 
 
-/* ─── RESPONSIVE ─── */
+
 @media (max-width: 680px) {
     .grid {
         grid-template-columns: 1fr;
@@ -444,7 +446,7 @@ body::before {
     }
 }
 
-/* ─── TOAST NOTIFICATION ─── */
+
 #toast-container {
     position: fixed;
     top: 20px;
