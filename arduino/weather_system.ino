@@ -18,8 +18,8 @@ const int ldr = A0;
 const float SEUIL_MAX = 25.0;
 
 unsigned long prevServer = 0;
-const long serverInterval = 0; // Interval d'envoi des données sur l'interface web/mobile
-const long lcdInterval = 0;
+const long serverInterval = 15000; // Interval d'envoi des données sur l'interface web/mobile
+const long lcdInterval = 2000; // Interval de mise à jour de l'affichage LCD
 unsigned long prevLcd = 0;
 
 int remote = 0;
