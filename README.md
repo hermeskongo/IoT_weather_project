@@ -8,7 +8,7 @@
 ## Description du projet
 
 Ce projet est une **station météo connectée** permettant de **surveiller la température, l'humidité, la pression atmosphérique et la luminosité** en temps réel. Il inclut également la **gestion automatique et manuelle d’un ventilateur** en fonction de la température mesurée.
-Il réalisé dans le cadre d'une compétition d'électronique à l'université de [IGA Maroc](https://iga.ac.ma/)
+Il a été réalisé dans le cadre d'une compétition d'électronique à l'université de [IGA Maroc](https://iga.ac.ma/)
 
 Le projet est composé de trois parties principales :
 
